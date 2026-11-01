@@ -1,0 +1,67 @@
+============================================================
+  BUS PASS TABLES - DIAGRAM INSTRUCTIONS
+  File: bus_pass_tables.drawio
+  Project: Bus Pass System | SQL Training
+============================================================
+
+NOTE: This file describes the Entity Relationship Diagram (ERD)
+      for the bus_pass database. The actual .drawio diagram must
+      be created manually in draw.io (app.diagrams.net).
+
+INSTRUCTIONS TO CREATE THE DIAGRAM:
+  1. Open your browser and go to: https://app.diagrams.net/
+  2. Choose "Create New Diagram" → Select "Entity Relationship" template.
+  3. Draw the following three tables with their columns and relationships.
+  4. Save the file as: bus_pass_tables.drawio
+  5. Export a PNG screenshot and save as: bus_pass_tables.png
+
+------------------------------------------------------------
+TABLE STRUCTURE TO DRAW:
+------------------------------------------------------------
+
+[passengers]
+  PK  passenger_id    INT AUTO_INCREMENT
+      full_name       VARCHAR(100) NOT NULL
+      roll_number     VARCHAR(20)  UNIQUE NOT NULL
+      class           VARCHAR(10)  NOT NULL
+      section         CHAR(1)
+      contact_number  CHAR(10)
+      address         TEXT
+      created_at      TIMESTAMP
+
+[routes]
+  PK  route_id        INT AUTO_INCREMENT
+      route_name      VARCHAR(100) NOT NULL
+      start_point     VARCHAR(100)
+      end_point       VARCHAR(100)
+      distance_km     DECIMAL(5,2)
+      monthly_fee     DECIMAL(8,2) NOT NULL
+
+[bus_passes]
+  PK  pass_id         INT AUTO_INCREMENT
+  FK  passenger_id    INT  → passengers.passenger_id
+  FK  route_id        INT  → routes.route_id
+      pass_number     VARCHAR(20) UNIQUE NOT NULL
+      issue_date      DATE NOT NULL
+      expiry_date     DATE NOT NULL
+      is_active       BOOLEAN DEFAULT TRUE
+      fee_paid        DECIMAL(8,2) NOT NULL
+
+------------------------------------------------------------
+RELATIONSHIPS:
+------------------------------------------------------------
+  passengers  (1) ────── (M)  bus_passes    [One passenger → many passes over time]
+  routes      (1) ────── (M)  bus_passes    [One route → many passes issued]
+
+RELATIONSHIP TYPE: One-to-Many (both relationships)
+
+------------------------------------------------------------
+DIAGRAM TIPS IN DRAW.IO:
+------------------------------------------------------------
+  - Use the ERD shape library (Extras → Edit Diagram or search "ERD")
+  - Use crow's foot notation for 1-to-many relationships
+  - Colour: passengers = Blue, routes = Green, bus_passes = Orange
+  - Draw arrows from FK in bus_passes to PK in referenced tables
+  - Add a title: "Bus Pass System - ERD"
+
+============================================================

@@ -1,0 +1,144 @@
+================================================================
+SESSION 6 | TASK 2: ACCESS ERROR – Private Member Access Demo
+================================================================
+Program   : hotel_booking.cpp (Session_6)
+Language  : C++
+Topic     : Encapsulation – Compiler Error for Private Access
+File      : access_error.txt
+Location  : Session_6/hotel_booking/
+================================================================
+
+INTENTIONAL ERROR CODE (DO NOT COMPILE as-is):
+-------------------------------------------
+// This code demonstrates what happens when you try to
+// directly access private data members from outside a class.
+
+#include <iostream>
+using namespace std;
+
+class Room {
+private:                          // <-- PRIVATE section
+    int    roomNumber;            // private data!
+    string guestName;             // private data!
+    int    nights;                // private data!
+    bool   isBooked;              // private data!
+public:
+    Room(int r, string g, int n) :
+         roomNumber(r), guestName(g), nights(n), isBooked(true) {}
+};
+
+int main() {
+    Room r(101, "Aarav", 3);
+
+    // ILLEGAL ACCESS ATTEMPTS:
+    cout << r.roomNumber;    // Line A – ERROR: private
+    r.guestName = "Priya";  // Line B – ERROR: private
+    r.nights = -5;           // Line C – ERROR: private (and invalid!)
+    r.isBooked = false;      // Line D – ERROR: private
+    return 0;
+}
+
+COMPILER ERROR OUTPUT (g++ -Wall access_demo.cpp):
+-------------------------------------------
+access_demo.cpp: In function 'int main()':
+
+access_demo.cpp:18:16: error: 'int Room::roomNumber' is private
+                              within this context
+       cout << r.roomNumber;    // Line A
+                 ^~~~~~~~~~
+access_demo.cpp:5:9: note: declared private here
+         int roomNumber;
+             ^~~~~~~~~~
+
+access_demo.cpp:19:7: error: 'std::string Room::guestName' is
+                             private within this context
+       r.guestName = "Priya";  // Line B
+         ^~~~~~~~~
+access_demo.cpp:6:12: note: declared private here
+         string guestName;
+                ^~~~~~~~~
+
+access_demo.cpp:20:7: error: 'int Room::nights' is private
+                             within this context
+       r.nights = -5;           // Line C
+         ^~~~~~~
+access_demo.cpp:7:9: note: declared private here
+         int nights;
+             ^~~~~~~
+
+access_demo.cpp:21:7: error: 'bool Room::isBooked' is private
+                             within this context
+       r.isBooked = false;      // Line D
+         ^~~~~~~~~
+access_demo.cpp:8:10: note: declared private here
+         bool isBooked;
+              ^~~~~~~~~
+
+4 errors generated.
+Compilation FAILED.
+
+WHAT THIS PROVES:
+-------------------------------------------
+  ✓ Private data members are COMPLETELY INACCESSIBLE from outside the class.
+  ✓ The C++ compiler enforces this at COMPILE TIME (before the program even runs).
+  ✓ Any attempt to access private data = compilation error = program won't run.
+  ✓ This is the core of ENCAPSULATION: the class protects its own data.
+
+CORRECT WAY – Using Public Getters and Validated Setters:
+-------------------------------------------
+int main() {
+    Room r(101, "Aarav", 3);
+
+    // Using PUBLIC getters (correct):
+    cout << r.getRoomNumber();     // OK – public method
+    cout << r.getGuestName();      // OK – public method
+    cout << r.getNights();         // OK – public method
+
+    // Using PUBLIC validated setters (correct):
+    r.setNights(5);               // OK – setter validates before storing
+    r.setNights(-1);              // Rejected! setter prints error, ignores value
+    r.setGuestName("Priya");      // OK – setter validates name
+
+    return 0;
+}
+
+OUTPUT:
+    101
+    Aarav
+    3
+    [VALIDATION PASSED] nights set to 5
+    [VALIDATION FAILED] nights=-1 rejected! Must be 1-365.
+    [VALIDATION PASSED] name set to Priya
+
+BENEFITS OF ENCAPSULATION (demonstrated):
+-------------------------------------------
+  1. SECURITY: Invalid data like nights=-1 is REJECTED by the setter.
+               Without encapsulation, r.nights = -1 would silently corrupt data.
+
+  2. VALIDATION: setNights() checks that value is between 1 and 365.
+                 The class guarantees its data is always valid.
+
+  3. ABSTRACTION: Users don't need to know HOW nights is stored.
+                  They just call setNights() and getNights().
+
+  4. FLEXIBILITY: If we change nights from int to float later,
+                  the setter/getter interface stays the same.
+                  External code doesn't break.
+
+  5. DEBUGGING: If nights is ever wrong, we only need to check
+                setNights() – one place, not the entire program.
+
+ENCAPSULATION VS ABSTRACTION:
+-------------------------------------------
+  Encapsulation = BUNDLING data + methods + restricting access
+    → HOW data is protected (private/public/setters)
+
+  Abstraction   = HIDING complexity, showing only the interface
+    → WHAT operations are available (calculateCost, book, display)
+    → Users don't see the vtable, vptr, or pricing formula
+
+Both work together to create clean, secure, maintainable code.
+
+================================================================
+END OF ACCESS ERROR DEMO – Session 6
+================================================================

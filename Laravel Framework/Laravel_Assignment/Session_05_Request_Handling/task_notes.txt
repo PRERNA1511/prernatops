@@ -1,0 +1,15 @@
+SESSION 05 TASK NOTES & ANSWERS
+=================================
+
+Q1: Why is CSRF protection needed in web applications?
+Answer:
+Cross-Site Request Forgery (CSRF) is an attack where a malicious website tricks a user's browser into executing an unauthorized action on a web application where the user is currently authenticated. Laravel protects against this by generating a unique secret token for every active session. When a form is submitted, Laravel compares the submitted token against the session token. If they do not match, the request is immediately rejected.
+
+Q2: How does old() work in Laravel forms?
+Answer:
+When validation fails, Laravel automatically redirects the user back to the form and flashes the submitted input data into the session for the next request. The old('field_name') helper retrieves this flashed data, preventing users from having to re-type information.
+
+Q3: Difference between $request->input() and $request->all()?
+Answer:
+- $request->input('key', 'default') safely retrieves a single input value with an optional default.
+- $request->all() returns an associative array containing all input data from the request payload.

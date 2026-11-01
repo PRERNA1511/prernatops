@@ -1,0 +1,40 @@
+SCREENSHOT INSTRUCTIONS – topper.png
+=====================================
+Session 4 – Data Retrieval with SELECT
+Folder: school_db
+
+HOW TO TAKE THIS SCREENSHOT:
+1. Open MySQL Workbench and connect to your local MySQL server.
+2. Make sure school_setup.sql and school_data.sql have already been run.
+3. Open and run school_queries.sql, OR run the topper query directly:
+
+---SQL TO RUN---
+USE school_db;
+
+SELECT
+    s.roll_no                AS "Roll No",
+    s.name                   AS "Topper Name",
+    s.grade                  AS "Class",
+    s.section                AS "Section",
+    SUM(m.marks)             AS "Total Marks",
+    ROUND(AVG(m.marks), 2)  AS "Average Marks"
+FROM   students s
+JOIN   marks    m ON s.roll_no = m.roll_no
+GROUP BY s.roll_no, s.name, s.grade, s.section
+ORDER BY SUM(m.marks) DESC
+LIMIT 1;
+---END SQL---
+
+4. The result will show 1 row – the student with the highest total marks.
+   Expected topper: Priya Nair (roll_no 4) with Total Marks = 368, Avg = 92.00
+
+5. Take a screenshot of the MySQL Workbench result grid showing the topper row.
+6. Save the screenshot as: topper.png
+7. Place this file in the school_db/ folder.
+
+WHAT THE SCREENSHOT MUST SHOW:
+- The topper query visible in the editor
+- The result grid with exactly 1 row showing the topper's details:
+  Roll No | Topper Name | Class | Section | Total Marks | Average Marks
+
+REPLACE THIS FILE with the actual topper.png screenshot.

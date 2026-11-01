@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Events;
+
+use App\Models\Playlist;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+
+class PlaylistCreated
+{
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    public Playlist $playlist;
+
+    /**
+     * Create a new event instance.
+     */
+    public function __construct(Playlist $playlist)
+    {
+        $this->playlist = $playlist;
+    }
+}

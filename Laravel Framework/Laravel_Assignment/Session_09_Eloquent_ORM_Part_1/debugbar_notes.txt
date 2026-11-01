@@ -1,0 +1,15 @@
+SESSION 09 DEBUGBAR & ELOQUENT QUERY NOTES
+===========================================
+
+Q1: What does Laravel Debugbar show in the Queries Tab?
+Answer:
+Laravel Debugbar's Queries tab shows:
+1. Total number of database queries executed during the HTTP request.
+2. The exact SQL statement of each query (e.g. SELECT * FROM playlists WHERE is_public = 1).
+3. The execution time of each query in milliseconds (ms), highlighting slow queries in red or orange.
+4. Bound parameters injected into prepared statements.
+5. Duplicate queries, alerting developers to redundant queries and the N+1 problem.
+
+Q2: What is the benefit of mass-assignment protection with $fillable?
+Answer:
+The $fillable property on an Eloquent model acts as an allowlist of attributes that can be mass-assigned when passing user input arrays into Model::create() or $model->update(). This protects against malicious users injecting unexpected columns (such as is_admin = true).

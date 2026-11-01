@@ -1,0 +1,198 @@
+============================================================
+  DATABASE COMPARISON: MySQL vs Other Popular Databases
+  Project: Bus Pass System | SQL Training
+  Date   : 2026-10-29
+============================================================
+
+This document compares MySQL Community Server (used in this project)
+with other popular databases so beginners understand why MySQL was
+chosen for the Bus Pass system.
+
+------------------------------------------------------------
+1. MYSQL COMMUNITY SERVER
+------------------------------------------------------------
+Type            : Relational Database Management System (RDBMS)
+Query Language  : SQL (Structured Query Language)
+License         : Free, Open Source (Community Edition)
+Developed by    : Oracle Corporation
+Best For        : Web applications, school projects, small to mid-size apps
+GUI Tool        : MySQL Workbench
+
+PROS:
+  + Free to use
+  + Easy to install and set up on Windows
+  + Excellent documentation and community support
+  + Works well with MySQL Workbench for visual management
+  + Supports transactions, foreign keys, stored procedures
+  + Industry standard - widely used in real-world projects
+
+CONS:
+  - Not ideal for very large enterprise-scale applications
+  - Slightly limited NoSQL capabilities compared to MongoDB
+
+Used in this project because:
+  -> Free, beginner-friendly, and supported by MySQL Workbench
+  -> Standard SQL makes queries portable to other databases
+  -> School bus pass data is structured and relational
+
+------------------------------------------------------------
+2. ORACLE DATABASE
+------------------------------------------------------------
+Type            : RDBMS
+Query Language  : SQL + PL/SQL (Oracle's extended SQL)
+License         : Commercial (paid); free Express Edition available
+Developed by    : Oracle Corporation
+Best For        : Large enterprises, banks, government systems
+
+PROS:
+  + Extremely powerful and scalable
+  + Advanced PL/SQL for complex stored programs
+  + Strong security and auditing features
+  + High availability (RAC, Data Guard)
+
+CONS:
+  - Very expensive for full versions
+  - Complex to set up and administer
+  - Overkill for small projects like a school bus pass system
+
+Comparison with MySQL:
+  -> Both use standard SQL, so queries are similar
+  -> Oracle uses SEQUENCE instead of AUTO_INCREMENT
+  -> Oracle uses SYSDATE instead of NOW() / CURDATE()
+  -> Oracle has ROWNUM instead of LIMIT
+
+------------------------------------------------------------
+3. MICROSOFT SQL SERVER
+------------------------------------------------------------
+Type            : RDBMS
+Query Language  : T-SQL (Transact-SQL)
+License         : Commercial; free Express edition available
+Developed by    : Microsoft
+Best For        : Windows-based enterprise environments, .NET applications
+
+PROS:
+  + Excellent integration with Microsoft products (Azure, Power BI)
+  + Strong reporting and BI tools
+  + Good Windows GUI (SQL Server Management Studio)
+
+CONS:
+  - Primarily Windows-focused (Linux support is newer)
+  - Costs money for full versions
+  - Uses TOP n instead of LIMIT n
+  - Uses GETDATE() instead of NOW()
+
+Comparison with MySQL:
+  -> MySQL uses LIMIT 5; SQL Server uses SELECT TOP 5
+  -> MySQL uses AUTO_INCREMENT; SQL Server uses IDENTITY(1,1)
+  -> Both support transactions, triggers, stored procedures
+
+------------------------------------------------------------
+4. POSTGRESQL
+------------------------------------------------------------
+Type            : Advanced Open-Source RDBMS
+Query Language  : SQL (very standard-compliant)
+License         : Free, Open Source
+Developed by    : PostgreSQL Global Development Group
+Best For        : Complex queries, data integrity, analytics
+
+PROS:
+  + Most SQL-standard-compliant free database
+  + Supports FULL OUTER JOIN natively (MySQL does not)
+  + Excellent for complex data types and queries
+  + Strong ACID compliance
+
+CONS:
+  - Slightly harder to set up than MySQL for beginners
+  - MySQL Workbench does not work with PostgreSQL
+
+Comparison with MySQL:
+  -> PostgreSQL supports FULL OUTER JOIN; MySQL requires UNION workaround
+  -> PostgreSQL uses SERIAL instead of AUTO_INCREMENT
+  -> Both support JSON, transactions, triggers, stored functions
+  -> MySQL is slightly faster for simple read-heavy workloads
+
+------------------------------------------------------------
+5. SQLITE
+------------------------------------------------------------
+Type            : Lightweight Embedded RDBMS
+Query Language  : SQL (subset)
+License         : Public Domain (free)
+Developed by    : D. Richard Hipp
+Best For        : Mobile apps, embedded systems, local testing, Python scripts
+
+PROS:
+  + Zero configuration — no server needed
+  + Single file database (great for portable apps)
+  + Built into Python, Android, and many languages
+  + Very lightweight
+
+CONS:
+  - Not suitable for multi-user concurrent access
+  - No user management or access control
+  - No stored procedures or complex triggers
+  - No network access (local file only)
+
+Comparison with MySQL:
+  -> SQLite: no server needed; MySQL: requires MySQL Server running
+  -> SQLite: no GRANT/REVOKE; MySQL: full user permission system
+  -> SQLite is good for learning SQL basics; MySQL for real projects
+
+------------------------------------------------------------
+6. MONGODB (NoSQL - for comparison)
+------------------------------------------------------------
+Type            : Document Database (NoSQL)
+Query Language  : MongoDB Query Language (MQL), not SQL
+License         : Free Community Edition / Commercial
+Developed by    : MongoDB Inc.
+Best For        : Unstructured data, JSON documents, flexible schemas
+
+PROS:
+  + Schema-less — documents can have different fields
+  + Excellent horizontal scaling (sharding)
+  + Good for rapidly changing data structures
+
+CONS:
+  - NOT relational — no JOINs in the traditional sense
+  - No ACID transactions across multiple documents (older versions)
+  - Cannot use standard SQL
+  - Not suitable for structured school bus pass data
+
+Comparison with MySQL:
+  -> MySQL: tables with fixed columns; MongoDB: JSON documents
+  -> MySQL: SQL SELECT; MongoDB: db.collection.find({})
+  -> For Bus Pass system: MySQL is clearly better (structured data,
+     relationships between passengers, routes, and passes)
+
+------------------------------------------------------------
+SUMMARY TABLE
+------------------------------------------------------------
+
+Feature           | MySQL    | Oracle   | SQL Server | PostgreSQL | SQLite  | MongoDB
+------------------|----------|----------|------------|------------|---------|---------
+Type              | RDBMS    | RDBMS    | RDBMS      | RDBMS      | RDBMS   | NoSQL
+Cost              | Free     | Paid     | Paid       | Free       | Free    | Free
+SQL Support       | Yes      | Yes      | Yes        | Yes        | Yes     | No
+Stored Procs      | Yes      | Yes      | Yes        | Yes        | No      | No
+FULL OUTER JOIN   | Via UNION| Yes      | Yes        | Yes        | No      | N/A
+AUTO_INCREMENT    | Yes      | SEQUENCE | IDENTITY   | SERIAL     | Yes     | N/A
+Best for Beginners| ★★★★★   | ★★★      | ★★★        | ★★★★       | ★★★★   | ★★★
+Used in Project   | YES      | No       | No         | No         | No      | No
+
+------------------------------------------------------------
+CONCLUSION
+------------------------------------------------------------
+For this Bus Pass mini-project and the overall SQL Training course,
+MySQL Community Server is the IDEAL choice because:
+
+  1. It is FREE and easy to install on Windows.
+  2. MySQL Workbench provides a visual interface perfect for beginners.
+  3. It supports all required features: tables, foreign keys, stored
+     procedures, triggers, and transactions.
+  4. The SQL learned in MySQL translates easily to Oracle, SQL Server,
+     and PostgreSQL with minor syntax adjustments.
+  5. It is widely used in schools, colleges, and companies, making
+     the skills directly employable.
+
+============================================================
+END OF DATABASE COMPARISON DOCUMENT
+============================================================

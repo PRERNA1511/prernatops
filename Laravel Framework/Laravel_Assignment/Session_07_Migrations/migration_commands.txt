@@ -1,0 +1,23 @@
+SESSION 07 MIGRATION COMMANDS REFERENCE
+========================================
+
+1. Run all pending migrations:
+   php artisan migrate
+
+2. Check status of all migrations:
+   php artisan migrate:status
+
+3. Rollback the most recent migration batch:
+   php artisan migrate:rollback
+
+4. Rollback specific number of steps (e.g. 2 batches):
+   php artisan migrate:rollback --step=2
+
+5. Rollback all migrations across the entire application:
+   php artisan migrate:reset
+
+6. Rollback all migrations and re-run them from scratch:
+   php artisan migrate:refresh
+
+7. Rollback, re-run, and execute seeders:
+   php artisan migrate:refresh --seed

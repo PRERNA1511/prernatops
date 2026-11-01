@@ -1,0 +1,92 @@
+================================================================
+SESSION 5 | WITHOUT VIRTUAL – Static Binding Demonstration
+================================================================
+Program   : hotel_booking.cpp (Session_5)
+Language  : C++
+Topic     : Function Binding WITHOUT virtual keyword
+File      : without_virtual.txt
+Location  : Session_5/hotel_booking/
+================================================================
+
+Code Fragment (WITHOUT virtual keyword):
+-------------------------------------------
+class Room {
+public:
+    double calculateCost() const {   // NOT virtual – static binding
+        return 1000.0 * nights;      // base rate only
+    }
+    void display() const { ... }     // NOT virtual
+};
+
+class SingleRoom : public Room {
+public:
+    double calculateCost() const {   // hides base function
+        return 1500.0 * nights;
+    }
+};
+
+class DoubleRoom : public Room {
+public:
+    double calculateCost() const {   // hides base function
+        return 2500.0 * nights;
+    }
+};
+
+class Suite : public Room {
+public:
+    double calculateCost() const {   // hides base function
+        return 5000.0 * nights;
+    }
+};
+
+Test Code (demonstrating the problem):
+-------------------------------------------
+Suite  s(301, "Rahul", 4, true, 15);
+Room  *r = &s;            // base class pointer to Suite object
+
+cout << s.calculateCost();  // Called on Suite object directly
+cout << r->calculateCost(); // Called via Room* pointer
+
+OUTPUT:
+    s.calculateCost() = 24000   (correct – Suite object, Suite method)
+    r->calculateCost() = 4000   (WRONG! – Room pointer calls Room method)
+
+EXPLANATION:
+    Without 'virtual', the compiler decides at COMPILE TIME which
+    function to call based on the POINTER TYPE (Room*), not the
+    actual object type (Suite).
+
+    This is called STATIC BINDING or EARLY BINDING.
+
+    The compiler says: "r is a Room*, so call Room::calculateCost()"
+    It does NOT check what r actually points to (a Suite object).
+
+IMPACT IN HOTEL SYSTEM (without virtual):
+-------------------------------------------
+Room *rooms[6] = {
+    new SingleRoom(101, "Aarav",  2, "Queen"),    // should be 3000
+    new SingleRoom(102, "Neha",   1, "Single"),   // should be 1500
+    new DoubleRoom(201, "Priya",  3, false),       // should be 7500
+    new DoubleRoom(202, "Vikram", 2, true),        // should be 6000
+    new Suite(301, "Rahul",   4, true,  15),       // should be 24000
+    new Suite(302, "Anita",   2, false,  8)        // should be 10000
+};
+
+WRONG OUTPUT (without virtual):
+    Room 101  Aarav   2 nights  Rs 2000   (should be 3000)
+    Room 102  Neha    1 night   Rs 1000   (should be 1500)
+    Room 201  Priya   3 nights  Rs 3000   (should be 7500)
+    Room 202  Vikram  2 nights  Rs 2000   (should be 6000)
+    Room 301  Rahul   4 nights  Rs 4000   (should be 24000)
+    Room 302  Anita   2 nights  Rs 2000   (should be 10000)
+    Grand Total: Rs 14000   (should be Rs 52000)
+
+CONCLUSION:
+    Without virtual, every room is treated as a base Room.
+    The derived class calculateCost() methods are never called.
+    Result: Incorrect billing – hotel loses Rs 38000 in revenue!
+    SOLUTION: Add 'virtual' keyword → see with_virtual.txt
+
+================================================================
+END OF WITHOUT VIRTUAL DEMO – Session 5
+================================================================

@@ -1,0 +1,30 @@
+DEBUG RUN LOG - Session 14
+==========================
+File: parking_fee.c (corrected version)
+Compiler: gcc -Wall -o parking_fee parking_fee.c
+
+--- Test Case 1: T, 1 ---
+Input : Vehicle Type = T, Hours = 1
+Output:
+  Vehicle Type : T
+  Hours Parked : 1
+  Parking Fee  : Rs. 10.00
+Expected: Rs. 10.00 -> PASS
+
+--- Test Case 2: F, 3 ---
+Input : Vehicle Type = F, Hours = 3
+Output:
+  Vehicle Type : F
+  Hours Parked : 3
+  Parking Fee  : Rs. 60.00
+Expected: Rs. 60.00 -> PASS
+
+--- Test Case 3: F, 0 ---
+Input : Vehicle Type = F, Hours = 0
+Output:
+  Vehicle Type : F
+  Hours Parked : 0
+  Parking Fee  : Rs. 0.00
+Expected: Rs. 0.00 -> PASS
+
+All test cases passed.

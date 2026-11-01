@@ -1,0 +1,20 @@
+SESSION 01 TASK NOTES & ANSWERS
+=================================
+
+Q1: What is Laravel and what are its main advantages?
+Answer:
+Laravel is an open-source PHP web framework based on the MVC (Model-View-Controller) architectural pattern. Its main advantages include:
+1. Expressive and clean syntax that is easy for beginners to learn.
+2. Built-in tools like Eloquent ORM, Artisan CLI, Blade templating, and database migrations.
+3. High security out-of-the-box, protecting against SQL injection, CSRF, and XSS attacks.
+4. Rich ecosystem and strong community support.
+
+Q2: Explain the MVC architecture in simple terms.
+Answer:
+- Model: The component that represents the data and database logic (e.g., User, Playlist).
+- View: What the user sees on their screen (HTML and Blade templates).
+- Controller: The mediator that takes requests from the user, retrieves or modifies data via the Model, and passes data to the View.
+
+Q3: What is Artisan CLI?
+Answer:
+Artisan is the command-line interface included with Laravel. It provides helpful commands for repetitive tasks such as creating controllers, models, running migrations, and clearing caches.

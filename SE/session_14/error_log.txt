@@ -1,0 +1,56 @@
+ERROR LOG - Session 14 Debugging Exercise
+==========================================
+File: parking_errors.c
+Date: 2026-10-30
+
+--- COMPILE ERRORS (gcc -Wall parking_errors.c) ---
+
+Error 1 (Line 15): Missing semicolon
+  Code   : char vtype
+  Error  : error: expected ';', ',' or ')' before 'int'
+  Fix    : char vtype;
+
+Error 2 (Line 22): Undeclared variable 'houers' (typo)
+  Code   : scanf("%d", &houers);
+  Error  : error: 'houers' undeclared (first use in this function)
+  Fix    : scanf("%d", &hours);
+
+Error 3 (Line 35): Missing closing brace for else block
+  Code   : (no closing brace after fee = hours * 20;)
+  Error  : error: expected '}' at end of input
+  Fix    : Add } after fee = hours * 20;
+
+Error 4 (Line 28): Wrong format specifier for float
+  Code   : printf("Fee: %d\n", fee);
+  Warning: warning: format '%d' expects argument of type 'int', but argument 2 has type 'double'
+  Fix    : printf("Fee: %.2f\n", fee);
+
+--- RUNTIME ISSUES ---
+(After fixing compile errors)
+
+Runtime Issue 1 (Logic Error): When hours = 0, the program should output Rs. 0.00,
+  but a missing guard allows negative fees if hours is negative.
+  Fix: Add a check: if (hours <= 0) fee = 0.0;
+
+--- DEBUG RUNS ---
+
+Test: T, 1
+  Expected: Rs. 10.00
+  Got (before fix): Rs. 10.00  [OK]
+
+Test: F, 3
+  Expected: Rs. 60.00
+  Got (before fix): Rs. 60.00  [OK]
+
+Test: F, 0
+  Expected: Rs. 0.00
+  Got (without guard): Rs. 0.00 [OK - because 0 * 20 = 0]
+
+--- CODING BEST PRACTICES ---
+1. Always end statements with semicolons.
+2. Check variable names carefully for typos.
+3. Match format specifiers to variable types.
+4. Ensure all braces are balanced.
+5. Add boundary checks (hours <= 0) to avoid unexpected results.
+6. Compile with -Wall to see all warnings.
+7. Test with edge cases (0 hours, negative hours, unknown vehicle type).

@@ -1,0 +1,41 @@
+DATABASE MANAGEMENT SYSTEM COMPARISON
+======================================
+Session 1 – Introduction to Databases
+Task: Compare MySQL, PostgreSQL, and SQLite
+
+Feature               | MySQL                        | PostgreSQL                    | SQLite
+----------------------|------------------------------|-------------------------------|-----------------------------
+Type                  | Relational DBMS              | Object-Relational DBMS        | Embedded Relational DBMS
+License               | Open Source (GPL) / Commercial| Open Source (PostgreSQL Lic.) | Public Domain
+Primary Use           | Web applications, LAMP stack  | Complex queries, analytics    | Mobile apps, embedded systems
+Platform              | Windows, Linux, macOS         | Windows, Linux, macOS         | Windows, Linux, macOS, mobile
+Storage Engines       | InnoDB, MyISAM, etc.          | Single storage engine         | Single file-based engine
+ACID Compliance       | Yes (InnoDB)                  | Yes (fully ACID)              | Yes
+Scalability           | High (with clustering)        | High (with partitioning)      | Low (single file, ~281 TB max)
+Performance           | Fast for read-heavy loads     | Better for complex queries    | Fastest for local, single-user
+Multi-user Support    | Yes                           | Yes                           | Limited (file-locking)
+Stored Procedures     | Yes                           | Yes                           | Limited (no native SP)
+Triggers              | Yes                           | Yes                           | Basic support
+Views                 | Yes                           | Yes                           | Yes (read-only)
+Foreign Keys          | Yes (InnoDB)                  | Yes                           | Yes (must be enabled)
+JSON Support          | Yes (MySQL 5.7+)              | Yes (JSONB, advanced)         | Yes (JSON functions)
+Full-Text Search      | Yes                           | Yes (advanced)                | Basic
+Replication           | Yes (master-slave, group)     | Yes (streaming, logical)      | No (single file)
+Authentication        | Username/Password, Plugin     | Multiple methods, LDAP, GSSAPI| File-based (no auth)
+GUI Tools             | MySQL Workbench               | pgAdmin, DBeaver              | DB Browser for SQLite
+Community Support     | Very large                   | Large and growing             | Large (lightweight focus)
+Default Port          | 3306                          | 5432                          | N/A (file-based)
+Max Database Size     | Unlimited (practical limits)  | Unlimited                     | 281 TB
+Typical Users         | WordPress, Joomla, Drupal     | PostGIS, financial systems    | Android, iOS, browsers
+
+CONCLUSION:
+-----------
+- MySQL is best suited for web applications that need speed and reliability with a large community.
+- PostgreSQL is preferred for applications requiring complex data types, advanced queries, and strict SQL compliance.
+- SQLite is ideal for lightweight, embedded, or local applications where a server is not needed.
+
+For this Bus Pass Management System project, MySQL Community Edition is used because:
+1. It is free and open source.
+2. MySQL Workbench provides an excellent GUI for table design and query execution.
+3. It supports all required features: tables, foreign keys, stored procedures, and transactions.
+4. Large community and excellent documentation for beginners.

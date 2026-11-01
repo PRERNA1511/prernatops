@@ -1,0 +1,25 @@
+SCREENSHOT INSTRUCTIONS – workbench_connected.png
+=================================================
+Session 1 – Introduction to Databases
+Folder: bus_pass
+
+HOW TO TAKE THIS SCREENSHOT:
+1. Open MySQL Workbench on your computer.
+2. On the home screen, click on your local MySQL connection
+   (typically named "Local instance MySQL80" or similar).
+3. Enter your root password when prompted.
+4. Once connected, the main Workbench editor window opens.
+5. In the top menu, you can see the connection name, schema navigator on the left,
+   and the SQL editor in the center.
+6. Take a full screenshot of the MySQL Workbench window showing:
+   - The connection is active (Navigator panel visible on the left)
+   - The MySQL version info visible in the output panel (run: SELECT VERSION(); )
+7. Save the screenshot as: workbench_connected.png
+8. Place this file in the bus_pass/ folder.
+
+WHAT THE SCREENSHOT MUST SHOW:
+- MySQL Workbench is open and connected to the local MySQL server
+- The schema/navigator panel is visible on the left
+- Optionally: result of SELECT VERSION(); showing the MySQL version number
+
+REPLACE THIS FILE with the actual workbench_connected.png screenshot.

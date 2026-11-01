@@ -1,0 +1,146 @@
+================================================================
+SESSION 3 | TASK 2: LIFECYCLE OUTPUT – Constructors & Destructors
+================================================================
+Program   : society_register.cpp (Session_3)
+Language  : C++
+Topic     : Object Lifecycle – Constructors and Destructor
+File      : lifecycle_output.txt
+Location  : Session_3/society_register/
+================================================================
+
+This file records the expected console output showing constructor
+and destructor calls during program execution.
+
+================================================================
+LIFECYCLE DEMO OUTPUT (from lifecycleDemo() function)
+================================================================
+
+============================================
+   OBJECT LIFECYCLE DEMO – Flat Class
+============================================
+Active Flat objects at start: 0
+
+-- Step 1: Default Constructor --
+[Default Constructor  ] Empty flat created          | Active objects: 1
+
+-- Step 2: Parameterized Constructor --
+[Param Constructor    ] Flat 101 for Aarav          | Active objects: 2
+
+-- Step 3: Parameterized Constructor --
+[Param Constructor    ] Flat 202 for Priya          | Active objects: 3
+
+-- Step 4: Copy Constructor --
+[Copy Constructor     ] Cloned Flat 101 (Aarav)     | Active objects: 4
+
+-- Step 5: Copy Constructor (explicit) --
+[Copy Constructor     ] Cloned Flat 202 (Priya)     | Active objects: 5
+
+Active objects now: 5
+
+-- Step 6: Heap allocation with 'new' --
+[Param Constructor    ] Flat 303 for Rahul          | Active objects: 6
+Heap object: Flat 303 for Rahul
+
+-- Step 7: Explicit delete (destructor called) --
+[Destructor           ] Flat 303 (Rahul) destroyed  | Active objects: 5
+
+Active objects before scope ends: 5
+
+-- Step 8: Scope ends -> destructors called --
+(Watch the destructor messages below)
+
+[Destructor           ] Flat 202 (Priya) destroyed  | Active objects: 4
+[Destructor           ] Flat 101 (Aarav) destroyed  | Active objects: 3
+[Destructor           ] Flat 202 (Priya) destroyed  | Active objects: 2
+[Destructor           ] Flat 101 (Aarav) destroyed  | Active objects: 1
+[Destructor           ] Empty flat destroyed         | Active objects: 0
+
+================================================================
+NOTE: DESTRUCTION ORDER
+================================================================
+Objects are destroyed in REVERSE ORDER of creation (LIFO):
+  Created:  f1 → f2 → f3 → f4 → f5
+  Destroyed: f5 → f4 → f3 → f2 → f1
+
+This is because local variables are stored on the STACK, and
+the stack follows Last-In-First-Out (LIFO) ordering.
+
+================================================================
+SOCIETY REGISTER WITH CONSTRUCTOR/DESTRUCTOR (sample run)
+================================================================
+
+[SocietyRegister created] 50 Flat objects initialized.
+(Note: 50 Default Constructor calls happen here for members[])
+
+  Enter Owner Name  : Aarav Sharma
+  Enter Flat Number : 101
+  Enter Owner ID    : 1001
+  ✓ Member added. (Total: 1)
+
+  [After setDetails() – no new constructor, existing object used]
+
+  Enter Owner Name  : Priya Mehta
+  Enter Flat Number : 202
+  Enter Owner ID    : 2002
+  ✓ Member added. (Total: 2)
+
+  Enter Owner Name  : Rahul Gupta
+  Enter Flat Number : 303
+  Enter Owner ID    : 3003
+  ✓ Member added. (Total: 3)
+
+============================================================
+  SOCIETY REGISTER MEMBERS
+------------------------------------------------------------
+S.No  Name                     Flat No      Owner ID
+------------------------------------------------------------
+1     Aarav Sharma             101          1001
+2     Priya Mehta              202          2002
+3     Rahul Gupta              303          3003
+============================================================
+  Total: 3
+
+Exiting... watch for destructor calls.
+
+[SocietyRegister destroyed] 3 registered members' objects freed.
+[Destructor] (50 Flat destructors called for members[] array)
+
+================================================================
+KEY CONCEPTS SUMMARY
+================================================================
+
+CONSTRUCTOR TYPES:
+  1. Default Constructor     → Flat()
+     Called when: Flat f1;
+     Purpose: Initialize with default/empty values
+
+  2. Parameterized Constructor → Flat(name, flatNo, id)
+     Called when: Flat f2("Aarav", 101, 1001);
+     Purpose: Initialize with specific values directly
+
+  3. Copy Constructor        → Flat(const Flat &other)
+     Called when: Flat f3 = f2; OR Flat f4(f2);
+     Purpose: Create an INDEPENDENT COPY of an existing object
+
+  4. Destructor              → ~Flat()
+     Called when: Object goes out of scope, OR delete is called
+     Purpose: Clean up resources (close files, free memory, etc.)
+
+RULES:
+  ✓ If no constructor is defined, C++ provides a default one
+  ✓ If any constructor is defined, default constructor is NOT auto-provided
+  ✓ Destructor cannot be overloaded (only one per class)
+  ✓ Destructor takes no parameters and returns nothing
+  ✓ Copy constructor takes a const reference to the same class
+  ✓ Initialization list (:member(value)) is more efficient than assignment
+
+STATIC objectCount USAGE:
+  - Declared inside Flat class: static int objectCount;
+  - Defined outside: int Flat::objectCount = 0;
+  - Incremented in ALL constructors
+  - Decremented in destructor
+  - Shows exact number of living Flat objects at any time
+
+================================================================
+END OF LIFECYCLE OUTPUT – Session 3
+================================================================

@@ -1,0 +1,39 @@
+SESSION 2 - GCC SETUP AND COMPILATION NOTES
+============================================
+
+Required Terminal Commands:
+  1. gcc --version
+  2. gcc -Wall -o kirana_banner kirana_banner.c
+  3. ./kirana_banner
+
+Note: GCC compilation and screenshots require GCC to be installed on the system.
+GCC was not found in the PATH at the time of this lab execution.
+
+To install GCC on Windows:
+  Option 1: Install MSYS2 from https://www.msys2.org/ (free, official)
+             Then run: pacman -S mingw-w64-x86_64-gcc
+  Option 2: Install TDM-GCC from https://jmeubank.github.io/tdm-gcc/ (free, official)
+  Option 3: Use WSL (Windows Subsystem for Linux) with apt install gcc
+
+After installing GCC, run the following commands in the terminal:
+  cd session_02
+  gcc --version
+  gcc -Wall -o kirana_banner kirana_banner.c
+  kirana_banner.exe
+
+Expected output of kirana_banner:
+  *********************************************
+  *                                           *
+  *        PRERNA KIRANA STORE                *
+  *        123, Market Road, Mumbai           *
+  *        Phone: 9876543210                  *
+  *        GST No: 27ABCDE1234F1Z5            *
+  *                                           *
+  *        Welcome! Thank you for shopping.   *
+  *                                           *
+  *********************************************
+
+Screenshots to save:
+  session_02/gcc_version.png      - gcc --version output
+  session_02/compilation.png      - gcc -Wall compilation output
+  session_02/banner_output.png    - kirana_banner.exe output

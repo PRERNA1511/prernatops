@@ -1,0 +1,11 @@
+SESSION 13 AUTHENTICATION PART 1 NOTES
+========================================
+
+Q1: Why must passwords always be hashed using Hash::make() or bcrypt?
+Answer:
+Passwords must never be stored in plain text. If a database is ever compromised, plain text passwords expose user accounts across multiple services. Laravel's Hash::make() uses the Bcrypt algorithm with salt and variable work factors, making brute force and rainbow table attacks computationally infeasible.
+
+Q2: How does Auth::check() differ from Auth::user()?
+Answer:
+- Auth::check() returns a boolean (true if the current user is authenticated, false if guest).
+- Auth::user() returns the authenticated User Eloquent model instance, or null if the user is a guest.

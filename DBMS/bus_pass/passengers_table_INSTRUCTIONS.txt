@@ -1,0 +1,68 @@
+SCREENSHOT INSTRUCTIONS – passengers_table.png
+===============================================
+Session 1 – Introduction to Databases
+Folder: bus_pass
+
+HOW TO TAKE THIS SCREENSHOT:
+1. Open MySQL Workbench and connect to your local MySQL server.
+2. In the SQL editor, run the following SQL to create and populate
+   the bus_pass database and passengers table:
+
+---SQL TO RUN---
+
+CREATE DATABASE IF NOT EXISTS bus_pass;
+USE bus_pass;
+
+CREATE TABLE IF NOT EXISTS bus_passes (
+    pass_id    INT PRIMARY KEY AUTO_INCREMENT,
+    route      VARCHAR(100) NOT NULL,
+    valid_from DATE         NOT NULL,
+    valid_to   DATE         NOT NULL,
+    pass_type  VARCHAR(50),
+    fare       DECIMAL(8,2) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS passengers (
+    passenger_id INT PRIMARY KEY AUTO_INCREMENT,
+    name         VARCHAR(100) NOT NULL,
+    age          INT          NOT NULL,
+    city         VARCHAR(100) NOT NULL,
+    pass_id      INT,
+    contact      VARCHAR(15),
+    CONSTRAINT fk_passenger_pass
+        FOREIGN KEY (pass_id) REFERENCES bus_passes(pass_id)
+        ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+INSERT INTO bus_passes (route, valid_from, valid_to, pass_type, fare) VALUES
+('Mumbai – Pune',      '2026-10-01', '2026-10-31', 'Monthly', 850.00),
+('Delhi – Agra',       '2026-10-01', '2026-10-31', 'Monthly', 700.00),
+('Chennai – Bengaluru','2026-10-01', '2026-10-31', 'Monthly', 950.00),
+('Kolkata – Howrah',   '2026-10-01', '2026-10-31', 'Weekly',  200.00),
+('Hyderabad – Warangal','2026-10-01','2026-10-31', 'Monthly', 600.00);
+
+INSERT INTO passengers (name, age, city, pass_id, contact) VALUES
+('Aarav Sharma',  22, 'Mumbai',    1, '9876543210'),
+('Diya Verma',    30, 'Pune',      1, '9876543211'),
+('Rohan Mehta',   25, 'Delhi',     2, '9876543212'),
+('Priya Nair',    28, 'Chennai',   3, '9876543213'),
+('Karan Singh',   35, 'Bengaluru', 3, '9876543214'),
+('Ananya Pillai', 21, 'Kolkata',   4, '9876543215'),
+('Vikram Joshi',  40, 'Hyderabad', 5, '9876543216'),
+('Sneha Iyer',    27, 'Warangal',  5, '9876543217');
+
+SELECT * FROM passengers;
+
+---END SQL---
+
+3. After running SELECT * FROM passengers; you will see all 8 rows in the result grid.
+4. Take a screenshot of the MySQL Workbench result grid showing the passengers table data.
+5. Save the screenshot as: passengers_table.png
+6. Place this file in the bus_pass/ folder.
+
+WHAT THE SCREENSHOT MUST SHOW:
+- The result grid with all 8 passenger rows
+- Columns: passenger_id, name, age, city, pass_id, contact
+- Real Indian city names visible (Mumbai, Pune, Delhi, Chennai, Bengaluru, Kolkata, Hyderabad, Warangal)
+
+REPLACE THIS FILE with the actual passengers_table.png screenshot.

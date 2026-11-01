@@ -1,0 +1,35 @@
+SCREENSHOT INSTRUCTIONS – show_tables.png
+==========================================
+Session 2 – SQL Basics & Commands
+Folder: school_db
+
+HOW TO TAKE THIS SCREENSHOT:
+1. Open MySQL Workbench and connect to your local MySQL server.
+2. Open and run the file: school_db/school_setup.sql
+   (File > Open SQL Script > select school_setup.sql > Run All)
+3. After the script runs successfully, in the SQL editor run:
+
+---SQL TO RUN---
+USE school_db;
+SHOW TABLES;
+---END SQL---
+
+4. The result grid will display:
+   Tables_in_school_db
+   --------------------
+   marks
+   students
+   subjects
+
+5. Take a screenshot of the MySQL Workbench window showing:
+   - The SHOW TABLES; query in the editor
+   - The result grid with the three table names
+6. Save the screenshot as: show_tables.png
+7. Place this file in the school_db/ folder.
+
+WHAT THE SCREENSHOT MUST SHOW:
+- Query: SHOW TABLES; (or SHOW TABLES IN school_db;)
+- Result grid listing: marks, students, subjects
+- The database name (school_db) visible in the context or navigator
+
+REPLACE THIS FILE with the actual show_tables.png screenshot.

@@ -1,0 +1,58 @@
+SCREENSHOT INSTRUCTIONS – summary_month1.png & summary_month2.png
+==================================================================
+Mini Project 3 – Tuition Fee DB
+Folder: tuition_fee_db
+
+HOW TO TAKE THESE SCREENSHOTS:
+1. Open MySQL Workbench and connect to your local MySQL server.
+2. Open and run: tuition_fee_db/tuition_fee_db.sql
+   This will:
+   - Create the tuition_fee_db database
+   - Create tables: students, courses, payments
+   - Insert all sample data for both months
+   - Create the monthly_fee_summary stored procedure
+3. After the full script runs without errors, run each procedure call separately:
+
+---FOR summary_month1.png---
+USE tuition_fee_db;
+CALL monthly_fee_summary('2026-09');
+
+Expected Detail Output (Month 2026-09):
+Student Name   | Course                  | Amount Paid | Payment Date | Payment Mode
+Aarav Sharma   | Mathematics Tuition     | 1500.00     | 2026-09-02   | Online
+Ananya Pillai  | Science & Technology    | 1800.00     | 2026-09-10   | Cash
+Diya Verma     | Science & Technology    | 1800.00     | 2026-09-03   | Cash
+Karan Singh    | Computer Fundamentals   | 2000.00     | 2026-09-08   | Cheque
+Priya Nair     | English Communication   | 1200.00     | 2026-09-06   | UPI
+Rohan Mehta    | Mathematics Tuition     | 1500.00     | 2026-09-05   | Online
+Sneha Iyer     | Computer Fundamentals   | 2000.00     | 2026-09-15   | UPI
+Vikram Joshi   | Commerce & Accountancy  | 1600.00     | 2026-09-12   | Online
+
+Expected Summary Row:
+Month   | Total Payments | Total Amount Collected | Average Payment
+2026-09 | 8              | 13400.00               | 1675.00
+
+Take a screenshot of this result grid and save as: summary_month1.png
+
+---FOR summary_month2.png---
+USE tuition_fee_db;
+CALL monthly_fee_summary('2026-10');
+
+Expected Detail Output (Month 2026-10): Same 8 students, same courses, amounts, Oct dates.
+
+Expected Summary Row:
+Month   | Total Payments | Total Amount Collected | Average Payment
+2026-10 | 8              | 13400.00               | 1675.00
+
+Take a screenshot of this result grid and save as: summary_month2.png
+
+WHERE TO SAVE:
+- summary_month1.png → tuition_fee_db/ folder
+- summary_month2.png → tuition_fee_db/ folder
+
+WHAT EACH SCREENSHOT MUST SHOW:
+- The CALL monthly_fee_summary(...) query in the SQL editor
+- Both result grids: the detail table AND the summary totals row
+- The month value visible (2026-09 or 2026-10 respectively)
+
+REPLACE THESE FILES with the actual .png screenshots.

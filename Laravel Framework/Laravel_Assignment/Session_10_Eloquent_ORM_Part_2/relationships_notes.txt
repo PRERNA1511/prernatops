@@ -1,0 +1,17 @@
+SESSION 10 ELOQUENT RELATIONSHIPS & N+1 PROBLEM NOTES
+======================================================
+
+Q1: What is the N+1 Query Problem in ORM systems?
+Answer:
+The N+1 query problem happens when an application executes 1 initial query to retrieve N parent records (e.g. 50 orders), and then inside a loop executes 1 additional query for each individual record to retrieve its related child data (e.g. 50 separate queries for each order's user). This results in 1 + 50 = 51 database queries, causing severe performance degradation.
+
+Q2: How does with() resolve the N+1 problem?
+Answer:
+Laravel's with() method performs Eager Loading. Instead of executing queries inside a loop, Laravel inspects all the parent IDs, executes a single WHERE IN query to fetch all related records in advance, and maps them in memory. For 50 orders, this executes only 2 queries instead of 51:
+  Query 1: SELECT * FROM orders LIMIT 50;
+  Query 2: SELECT * FROM users WHERE id IN (1, 2, 3, ...);
+
+Q3: When should belongsToMany be used over hasMany?
+Answer:
+Use hasMany when a parent model has multiple child records, but each child belongs strictly to one parent (e.g., One User has many Orders; each Order belongs to one User).
+Use belongsToMany when records on both sides can relate to multiple records on the other side (e.g., A Playlist has many Songs, and a Song can belong to multiple Playlists). This requires an intermediate pivot table.

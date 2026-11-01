@@ -1,0 +1,18 @@
+SESSION 16 MAIL CONFIGURATION & NOTIFICATIONS NOTES
+=====================================================
+
+Q1: Why use the 'log' mail driver during local testing?
+Answer:
+The 'log' driver requires no internet connection, no external SMTP server, and no third-party API credentials. It writes all outgoing email contents, headers, subject lines, and HTML directly to storage/logs/laravel.log. This allows students and developers to test email rendering and logic safely without accidentally sending test emails to real users.
+
+Q2: How do you configure production SMTP mail in Laravel?
+Answer:
+In production, update the .env file with real SMTP credentials (e.g., Mailgun, SendGrid, Amazon SES, or Gmail SMTP):
+  MAIL_MAILER=smtp
+  MAIL_HOST=smtp.mailgun.org
+  MAIL_PORT=587
+  MAIL_USERNAME=your_username
+  MAIL_PASSWORD=your_password
+  MAIL_ENCRYPTION=tls
+  MAIL_FROM_ADDRESS=noreply@yourdomain.com
+  MAIL_FROM_NAME="Laravel Music Portal"

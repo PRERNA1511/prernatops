@@ -1,0 +1,17 @@
+SESSION 08 TASK NOTES & ANSWERS
+=================================
+
+Q1: What is the purpose of Database Seeders?
+Answer:
+Seeders populate the database with initial, sample, or dummy data. They allow developers and testers to immediately work with realistic records without manually inserting rows via SQL commands.
+
+Q2: What is the Faker library in Laravel?
+Answer:
+Faker is a PHP library integrated into Laravel model factories. It generates randomized, realistic dummy data such as names, email addresses, paragraphs, dates, phone numbers, and numbers.
+
+Q3: How do you run seeders in Laravel?
+Answer:
+- To run the master DatabaseSeeder:
+  php artisan db:seed
+- To run an individual seeder class:
+  php artisan db:seed --class=GenreSeeder

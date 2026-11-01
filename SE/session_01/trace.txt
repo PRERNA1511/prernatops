@@ -1,0 +1,55 @@
+FLOWCHART TRACE FILE
+====================
+
+Plans:
+  Plan A: Rs.199, 28 days, 1.5 GB/day
+  Plan B: Rs.299, 56 days, 2.0 GB/day
+  Plan C: Rs.499, 84 days, 3.0 GB/day
+
+--------------------------------------------------------------
+Test Input 1: required_data = 1.5 GB/day, required_days = 28
+--------------------------------------------------------------
+Box Sequence:
+1. Start
+2. Display Plans
+3. Input: required_data = 1.5, required_days = 28
+4. Initialize best_plan = NONE, best_price = INFINITY
+5. Decision: Plan A data (1.5) >= required_data (1.5) AND Plan A validity (28) >= required_days (28)?
+   -> Yes
+6. Decision: Plan A price (199) < best_price (INFINITY)?
+   -> Yes
+7. Process: best_plan = Plan A, best_price = 199
+8. Decision: Plan B data (2.0) >= required_data (1.5) AND Plan B validity (56) >= required_days (28)?
+   -> Yes
+9. Decision: Plan B price (299) < best_price (199)?
+   -> No
+10. Decision: Plan C data (3.0) >= required_data (1.5) AND Plan C validity (84) >= required_days (28)?
+    -> Yes
+11. Decision: Plan C price (499) < best_price (199)?
+    -> No
+12. Decision: best_plan == NONE?
+    -> No
+13. Output: Recommended Plan: Plan A at Rs.199
+14. End
+
+--------------------------------------------------------------
+Test Input 2: required_data = 10 GB/day, required_days = 28
+--------------------------------------------------------------
+Box Sequence:
+1. Start
+2. Display Plans
+3. Input: required_data = 10, required_days = 28
+4. Initialize best_plan = NONE, best_price = INFINITY
+5. Decision: Plan A data (1.5) >= required_data (10)?
+   -> No
+6. Skip Plan A
+7. Decision: Plan B data (2.0) >= required_data (10)?
+   -> No
+8. Skip Plan B
+9. Decision: Plan C data (3.0) >= required_data (10)?
+   -> No
+10. Skip Plan C
+11. Decision: best_plan == NONE?
+    -> Yes
+12. Output: No plan fits your requirements.
+13. End

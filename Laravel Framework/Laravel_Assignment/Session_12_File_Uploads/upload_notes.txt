@@ -1,0 +1,13 @@
+SESSION 12 FILE UPLOAD NOTES
+==============================
+
+Q1: Why must storage:link be executed for file uploads?
+Answer:
+By default, files uploaded to storage/app/public are outside the public/ web root and cannot be accessed directly by web browsers. The command:
+  php artisan storage:link
+creates a symbolic link (symlink) from public/storage pointing to storage/app/public. This allows web browsers to load uploaded images publicly while keeping storage managed centrally.
+
+Q2: Why generate unique filenames instead of using getClientOriginalName()?
+Answer:
+1. Prevents collisions where two users upload different files with the same name (e.g. photo.jpg) and overwrite each other.
+2. Security: User-supplied original filenames could contain directory traversal characters (e.g. ../../) or special characters that could cause filesystem issues.

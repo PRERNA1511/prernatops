@@ -1,0 +1,14 @@
+SESSION 14 WISHLIST PROTECTION & LOGIN CUSTOMIZATION NOTES
+============================================================
+
+Q1: Why regenerate session tokens during login and logout?
+Answer:
+Regenerating the session ID via $request->session()->regenerate() prevents Session Fixation attacks, where an attacker tricks a victim into authenticating with a known session ID. Invalidating and regenerating tokens on logout guarantees that the session cannot be reused.
+
+Q2: How is wishlist protection enforced?
+Answer:
+Wishlist operations require identifying the owner of the like. In the controller:
+  if (!Auth::check()) {
+      return redirect()->route('session.14')->with('error', 'Authentication required!');
+  }
+This guarantees that only legitimate authenticated users can create or modify rows in the playlist_likes table.

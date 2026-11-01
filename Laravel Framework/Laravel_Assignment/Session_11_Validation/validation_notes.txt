@@ -1,0 +1,14 @@
+SESSION 11 FORM REQUEST VALIDATION NOTES
+===========================================
+
+Q1: Why extract validation into a Form Request class instead of keeping it in the controller?
+Answer:
+1. Separation of Concerns: Keeps the controller slim and focused purely on business flow, adhering to Single Responsibility.
+2. Reusability: Form Request classes can be reused across multiple controller actions or API endpoints.
+3. Dedicated Authorization: Form Request classes have an authorize() method that runs before validation rules are checked.
+4. Maintainability: When requirements change or validation rules grow complex, all validation logic is isolated in one organized class file.
+
+Q2: What is the difference between exists and unique validation rules?
+Answer:
+- exists:table,column verifies that the value supplied by the user already exists in the given database table (useful for foreign keys like genre_id).
+- unique:table,column ensures that the value supplied by the user does not already exist in the database table (useful for unique fields like username or email).

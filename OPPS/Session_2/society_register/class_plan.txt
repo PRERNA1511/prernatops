@@ -1,0 +1,169 @@
+================================================================
+SESSION 2 | TASK 2: CLASS PLAN – Classes and Objects
+================================================================
+Author   : OPPS Lab – Session 2
+Topic    : Classes and Objects in C++
+File     : class_plan.txt
+Location : Session_2/society_register/
+================================================================
+
+PURPOSE
+-------
+This document updates the class design plan to reflect the full
+Classes and Objects implementation in Session 2. We expand on
+Session 1's basic OOP design with:
+  - Formal class definitions with all specifiers
+  - Additional methods (sortByFlatNo, displayHeader, displayDetail)
+  - Unique flat number validation
+  - Private helper methods
+  - Object creation confirmation via constructor message
+
+================================================================
+SECTION 1: REVISED CLASS DIAGRAM
+================================================================
+
+  +-----------------------------+
+  |         <<class>>           |
+  |           Flat              |
+  |-----------------------------|
+  | PRIVATE:                    |
+  |  - ownerName  : string      |
+  |  - flatNumber : int         |
+  |  - ownerId    : long long   |
+  |  - occupied   : bool        |
+  |-----------------------------|
+  | PUBLIC:                     |
+  |  + Flat()                   |  <-- Default Constructor
+  |  + Flat(name, no, id)       |  <-- Parameterized Constructor
+  |  + setName(string)          |
+  |  + setFlatNo(int)           |
+  |  + setOwnerId(long long)    |
+  |  + setOccupied(bool)        |
+  |  + setDetails(...)          |
+  |  + getName()  : string      |
+  |  + getFlatNo(): int         |
+  |  + getId()    : long long   |
+  |  + isOccupied(): bool       |
+  |  + displayRow(int)          |
+  |  + displayDetail()          |
+  +-----------------------------+
+            1
+            |  (composition)
+           [*]
+  +-----------------------------+
+  |         <<class>>           |
+  |      SocietyRegister        |
+  |-----------------------------|
+  | PRIVATE:                    |
+  |  - CAPACITY : const int=50  |
+  |  - members[]: Flat[50]      |
+  |  - total    : int           |
+  |  - toLower(string): string  |
+  |  - displayHeader()          |
+  |-----------------------------|
+  | PUBLIC:                     |
+  |  + SocietyRegister()        |
+  |  + getTotal(): int          |
+  |  + addMember()              |
+  |  + displayAll()             |
+  |  + searchByName()           |
+  |  + sortByFlatNo()           |
+  +-----------------------------+
+
+================================================================
+SECTION 2: METHOD EXPLANATIONS
+================================================================
+
+Flat::setDetails(name, flatNo, id)
+  - Sets all three data members at once.
+  - Sets occupied = true to mark the slot as filled.
+
+Flat::displayRow(int serial)
+  - Prints one row in the members table.
+  - Uses iomanip::setw() for aligned columns.
+
+Flat::displayDetail()
+  - Prints a boxed, detailed view of one flat's info.
+
+SocietyRegister::addMember()
+  - Reads input from user.
+  - Validates: checks if flatNumber is already taken.
+  - Creates Flat object by calling setDetails().
+
+SocietyRegister::sortByFlatNo()
+  - Implements bubble sort on the members[] array.
+  - Swaps Flat objects directly (copy by value).
+  - After sorting, calls displayAll() to show result.
+
+SocietyRegister::displayHeader()
+  - Private helper that prints the column headers.
+  - Called internally by displayAll() and sortByFlatNo().
+
+SocietyRegister::toLower()
+  - Private helper for case-insensitive search.
+  - Converts each character using tolower().
+
+================================================================
+SECTION 3: KEY C++ CONCEPTS DEMONSTRATED (Session 2)
+================================================================
+
+1. CLASS DEFINITION
+   - Keyword: class
+   - Sections: private: and public:
+   - Members: data (attributes) and functions (methods)
+
+2. OBJECTS
+   - SocietyRegister reg;    --> creates one object named 'reg'
+   - Flat members[50];       --> array of 50 Flat objects
+
+3. ACCESS SPECIFIERS
+   - private:  data members (ownerName, flatNumber, ownerId)
+   - public:   all methods (getters, setters, display, etc.)
+
+4. CONSTRUCTOR
+   - Flat()         -- default constructor (empty flat)
+   - Flat(...)      -- parameterized constructor (pre-filled flat)
+   - SocietyRegister() -- initializes total=0
+
+5. MEMBER FUNCTIONS
+   - Called using: objectName.functionName()
+   - Example: reg.addMember(), members[i].displayRow(i+1)
+
+6. this POINTER (implicit)
+   - When methods access ownerName, they use this->ownerName
+
+7. CONST METHODS
+   - Declared with 'const' at the end: getFlatNo() const
+   - Cannot modify the object's data
+
+================================================================
+SECTION 4: COMPARISON WITH SESSION 1
+================================================================
+
+Session 1 (Basic OOP):           Session 2 (Complete OOP):
+--------------------------        --------------------------
+Basic Flat class                  Flat class with full getters/setters
+No validation                     Flat number uniqueness validation
+No sort                           sortByFlatNo() with bubble sort
+Basic display                     displayRow() + displayDetail()
+No constructor message            Constructor prints confirmation
+4 core methods                    8+ methods per class
+
+================================================================
+SECTION 5: SESSION 2 FILES
+================================================================
+
+  society_register.cpp   --> Main C++ program (Task 1)
+  class_plan.txt         --> This updated design document (Task 2)
+  [Task 3 & 4: see below notes]
+
+Task 3: OOP Advantages Writeup
+  - Code reuse via objects
+  - Data hiding and security
+  - Easy maintenance
+
+Task 4: Extended display/sort demo run and verification
+
+================================================================
+END OF CLASS PLAN – SESSION 2
+================================================================

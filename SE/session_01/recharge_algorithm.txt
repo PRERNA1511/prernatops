@@ -1,0 +1,45 @@
+RECHARGE PLAN SELECTION ALGORITHM
+==================================
+
+Available Plans:
+  Plan A: Rs.199, 28 days validity, 1.5 GB/day data
+  Plan B: Rs.299, 56 days validity, 2.0 GB/day data
+  Plan C: Rs.499, 84 days validity, 3.0 GB/day data
+
+Algorithm:
+----------
+1. START
+2. Display available recharge plans (Plan A, Plan B, Plan C) with price, validity, and daily data.
+3. INPUT: Read the user's required daily data (required_data in GB/day).
+4. INPUT: Read the user's required number of days (required_days).
+5. Initialize best_plan = NONE, best_price = INFINITY.
+6. IF Plan A daily data >= required_data AND Plan A validity >= required_days THEN
+       IF Plan A price < best_price THEN
+           best_plan = Plan A
+           best_price = Plan A price
+       END IF
+   ELSE
+       Skip Plan A (does not meet requirements)
+   END IF
+7. IF Plan B daily data >= required_data AND Plan B validity >= required_days THEN
+       IF Plan B price < best_price THEN
+           best_plan = Plan B
+           best_price = Plan B price
+       END IF
+   ELSE
+       Skip Plan B (does not meet requirements)
+   END IF
+8. IF Plan C daily data >= required_data AND Plan C validity >= required_days THEN
+       IF Plan C price < best_price THEN
+           best_plan = Plan C
+           best_price = Plan C price
+       END IF
+   ELSE
+       Skip Plan C (does not meet requirements)
+   END IF
+9. IF best_plan == NONE THEN
+       OUTPUT: "No plan fits your requirements."
+   ELSE
+       OUTPUT: "Recommended Plan: " + best_plan name + " at Rs." + best_price
+   END IF
+10. STOP

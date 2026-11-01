@@ -1,0 +1,121 @@
+================================================================
+SESSION 5 | WITH VIRTUAL – Dynamic Binding Demonstration
+================================================================
+Program   : hotel_booking.cpp (Session_5)
+Language  : C++
+Topic     : Runtime Polymorphism WITH virtual keyword
+File      : with_virtual.txt
+Location  : Session_5/hotel_booking/
+================================================================
+
+Code Fragment (WITH virtual keyword):
+-------------------------------------------
+class Room {
+public:
+    virtual double calculateCost() const = 0;  // pure virtual
+    virtual void   display()       const = 0;  // pure virtual
+    virtual string getRoomType()   const = 0;  // pure virtual
+    virtual ~Room() {}                         // virtual destructor
+};
+
+class SingleRoom : public Room {
+public:
+    double calculateCost() const override {
+        return 1500.0 * nights;
+    }
+};
+
+class DoubleRoom : public Room {
+public:
+    double calculateCost() const override {
+        return (2500.0 + (extraBed ? 500.0 : 0.0)) * nights;
+    }
+};
+
+class Suite : public Room {
+public:
+    double calculateCost() const override {
+        return (5000.0 + (hasJacuzzi ? 1000.0 : 0.0)) * nights;
+    }
+};
+
+Test Code:
+-------------------------------------------
+Suite  s(301, "Rahul", 4, true, 15);
+Room  *r = &s;             // base class pointer to Suite object
+
+cout << r->calculateCost(); // Calls Suite::calculateCost() CORRECTLY
+
+OUTPUT with virtual:
+    r->calculateCost() = 24000  (CORRECT! Suite method called via Room*)
+
+EXPLANATION – How Virtual Functions Work:
+-------------------------------------------
+When 'virtual' is declared, C++ creates a VTABLE for each class:
+
+  Room's vtable:
+    [0] = 0 (pure virtual, no implementation)
+
+  SingleRoom's vtable:
+    [0] = &SingleRoom::calculateCost
+
+  DoubleRoom's vtable:
+    [0] = &DoubleRoom::calculateCost
+
+  Suite's vtable:
+    [0] = &Suite::calculateCost
+
+Each OBJECT stores a hidden pointer (vptr) to its class's vtable.
+
+When r->calculateCost() is called:
+  1. CPU follows the vptr in the Suite object
+  2. Finds Suite's vtable
+  3. Calls Suite::calculateCost()
+  → CORRECT answer: 24000
+
+This is DYNAMIC BINDING or LATE BINDING (decided at runtime).
+
+CORRECT OUTPUT (with virtual):
+-------------------------------------------
+Room 101  Single Room  Aarav Sharma  2 nights  Queen        Rs 3000
+Room 102  Single Room  Neha Patel    1 night   Single       Rs 1500
+Room 201  Double Room  Priya & Raj   3 nights  Standard     Rs 7500
+Room 202  Double Room  Vikram Family 2 nights  Extra Bed    Rs 6000
+Room 301  Suite        Rahul Mehta   4 nights  With Jacuzzi Rs 24000 | Floor 15
+Room 302  Suite        Anita Singh   2 nights  No Jacuzzi   Rs 10000 | Floor 8
+=======================================================================
+Grand Total: Rs 52000
+
+COMPARISON TABLE:
+-------------------------------------------
+| Feature        | WITHOUT virtual     | WITH virtual         |
+|----------------|---------------------|----------------------|
+| Binding        | Compile-time        | Runtime              |
+| Type           | Static binding      | Dynamic binding      |
+| Function called| Based on ptr type   | Based on object type |
+| Result for ptr | Wrong (base method) | Correct (derived)    |
+| Performance    | Slightly faster     | Tiny overhead (vptr) |
+| Use case       | Same behavior needed| Different behaviors  |
+| Hotel total    | Rs 14000 (WRONG)    | Rs 52000 (CORRECT)   |
+
+RULES FOR VIRTUAL FUNCTIONS:
+-------------------------------------------
+  ✓ Only member functions can be virtual (not global functions)
+  ✓ Constructors CANNOT be virtual
+  ✓ Destructors SHOULD be virtual when using base class pointers
+  ✓ Pure virtual (= 0) makes the class abstract
+  ✓ Abstract class cannot be instantiated
+  ✓ Derived class must override all pure virtual functions
+  ✓ 'override' keyword confirms correct overriding (C++11)
+  ✓ 'final' prevents further overriding
+
+WHY VIRTUAL DESTRUCTOR IS IMPORTANT:
+-------------------------------------------
+    Room *r = new Suite(...);
+    delete r;
+    WITHOUT virtual ~Room(): only Room destructor called (Suite leaked!)
+    WITH    virtual ~Room(): Suite destructor called first, then Room (correct)
+
+================================================================
+END OF WITH VIRTUAL DEMO – Session 5
+================================================================

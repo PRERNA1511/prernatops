@@ -1,0 +1,144 @@
+================================================================
+SESSION 1 | TASK 4: CLASS PLAN – Society Registration System
+================================================================
+Author   : OPPS Lab – Session 1
+Topic    : Procedural vs Object Thinking
+File     : class_plan.txt
+Location : Session_1/society_register/
+================================================================
+
+PURPOSE
+-------
+This document describes the Object-Oriented Design Plan for the
+Society Registration System. It explains WHY we move from a
+procedural approach (society_procedural.c) to an OOP approach
+(society_register.cpp), and HOW the classes are structured.
+
+================================================================
+SECTION 1: PROBLEM STATEMENT
+================================================================
+We need to maintain a digital register for a residential society.
+Each flat has:
+  - An owner name
+  - A flat number
+  - An owner ID (unique identifier)
+
+Operations needed:
+  1. Register a new flat owner
+  2. Display all registered members
+  3. Search a member by name
+
+================================================================
+SECTION 2: PROCEDURAL DESIGN (society_procedural.c)
+================================================================
+File Language : C
+Approach      : Procedural
+
+Data Storage:
+  char   names[50][50]       --> Owner names
+  int    flatNumbers[50]     --> Flat numbers
+  long long ownerIds[50]     --> Owner IDs
+  int    totalMembers = 0    --> Count of registered members
+
+Functions:
+  void addMember()           --> Reads data into global arrays
+  void displayAll()          --> Prints all entries from arrays
+  void searchByName()        --> Loops arrays to find a match
+  void displayMenu()         --> Prints the menu options
+  void clearInputBuffer()    --> Utility to flush input
+
+Problems with Procedural:
+  - Data and functions are completely SEPARATE.
+  - Global arrays can be accidentally modified from ANYWHERE.
+  - Hard to expand (e.g., adding phone number = change 4 places).
+  - Cannot create multiple independent societies easily.
+  - No concept of "one flat's data" – it's spread across 3 arrays.
+
+================================================================
+SECTION 3: OOP DESIGN (society_register.cpp)
+================================================================
+File Language : C++
+Approach      : Object-Oriented Programming
+
+CLASS 1: Flat
+=============
+Represents ONE flat unit and its owner.
+
+  PRIVATE DATA MEMBERS:
+    string    ownerName     // Owner's full name
+    int       flatNumber    // Flat number (e.g., 101, 202)
+    long long ownerId       // Unique ID (e.g., Aadhar / member no.)
+
+  PUBLIC MEMBER FUNCTIONS:
+    Flat()                                   // Default constructor
+    Flat(string, int, long long)             // Parameterized constructor
+    void setDetails(string, int, long long)  // Setter for all fields
+    void display(int serial)                 // Print formatted row
+    string    getName()    const             // Getter for ownerName
+    int       getFlatNo()  const             // Getter for flatNumber
+    long long getId()      const             // Getter for ownerId
+    bool      isEmpty()    const             // Check if slot is empty
+
+  WHY THIS DESIGN?
+    - Flat object OWNS its own data.
+    - Only public methods can access/change private data.
+    - One Flat object = one complete flat record.
+    - Easy to copy, compare, or sort Flat objects.
+
+CLASS 2: SocietyRegister
+=========================
+Manages the complete collection of Flat objects.
+
+  PRIVATE DATA MEMBERS:
+    static const int MAX = 50  // Maximum capacity
+    Flat members[MAX]          // Array of Flat objects
+    int  total                 // Number of registered members
+
+  PUBLIC MEMBER FUNCTIONS:
+    SocietyRegister()         // Constructor, initializes total = 0
+    void addMember()          // Input and store a new Flat
+    void displayAll()  const  // Display all members in a table
+    void searchByName() const // Search members by name
+
+  PRIVATE HELPER:
+    string toLower(string) const  // Case-insensitive comparison helper
+
+  WHY THIS DESIGN?
+    - Manages ALL flats in one organized class.
+    - addMember() fills the next Flat object in the array.
+    - No global variables – all data lives safely inside the class.
+
+================================================================
+SECTION 4: OOP ADVANTAGES DEMONSTRATED
+================================================================
+
+| Aspect            | Procedural (C)              | OOP (C++)             |
+|-------------------|-----------------------------|-----------------------|
+| Data location     | Global arrays               | Inside Flat objects   |
+| Data protection   | None (freely accessible)    | Private (controlled)  |
+| Adding a field    | Change 3+ arrays & fns      | Add 1 member to Flat  |
+| Multiple societies| Need duplicate global arrays| Create 2 Register objs|
+| Code readability  | Scattered across functions  | Self-contained classes|
+| Maintainability   | Difficult                   | Easy                  |
+
+================================================================
+SECTION 5: FILES PRODUCED (Session 1)
+================================================================
+
+  society_procedural.c         --> C Procedural implementation
+  society_register.cpp         --> C++ OOP implementation
+  procedural_vs_object.drawio  --> Draw.io comparison diagram
+  class_plan.txt               --> This design document
+
+================================================================
+SECTION 6: NEXT STEPS (Preview of Session 2)
+================================================================
+Session 2 will enhance the Flat class with:
+  - A formal class definition with more methods
+  - displayHeader() for table formatting
+  - sortByFlatNo() to sort members
+  - Better input validation
+
+================================================================
+END OF CLASS PLAN – SESSION 1
+================================================================
